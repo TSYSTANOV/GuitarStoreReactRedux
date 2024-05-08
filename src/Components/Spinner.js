@@ -3,10 +3,10 @@ import "./Spinner.css";
 function Spinner() {
   const loadDataGoods = useSelector((state) => state.goods.isLoading);
   const loadDataCart = useSelector((state) => state.cart.isLoading);
-
+  
   return (
     <>
-      {loadDataGoods.isLoading || loadDataCart.isLoading ? (
+      {loadDataGoods || loadDataCart ? (
         <div className="spinner-container">
           <div className="lds-roller ">
             <div></div>

@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { handleCart } from "../Redux/CartSlice";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 function GoodsItem({ img, name, price, id }) {
+  const cartDatas = useSelector((state)=>state.cart.value)
   const dispatch = useDispatch();
   const btn = {
-    activeText: "Добавить в корзину",
+    activeText: "Добавить в корзsину",
     passiveText: "Удалить из корзины",
     activeClass: "product-element__btn_active",
     passiveClass: "",
   };
-  const [activeBtn, setActiveBtn] = useState(btn.activeText);
-  const [activeClass, setActiveClass] = useState(btn.passiveClass);
+  const activeBtn = (cartDatas.includes(id) ? btn.passiveText: btn.activeText);
+  const activeClass = (cartDatas.includes(id) ? btn.activeClass: btn.passiveClass);
   function handleAddToCart(e) {
-    if (activeBtn === btn.activeText) {
-      setActiveBtn(btn.passiveText);
-      setActiveClass(btn.activeClass);
-    } else {
-      setActiveBtn(btn.activeText);
-      setActiveClass(btn.passiveClass);
-    }
+    // if (activeBtn === btn.activeText) {
+    //   setActiveBtn(btn.passiveText);
+    //   setActiveClass(btn.activeClass);
+    // } else {
+    //   setActiveBtn(btn.activeText);
+    //   setActiveClass(btn.passiveClass);
+    // }
     dispatch(handleCart(e.target.dataset.id));
   }
   return (
